@@ -20,3 +20,16 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+  docker:
+    # Builds both images and checks the UI can reach the API through nginx.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose up --build -d
+      - name: Smoke test
+        run: |
+          for i in $(seq 1 30); do curl -fs http://localhost:8080/api/health && break; sleep 2; done
+          curl -fs http://localhost:8080/ | grep -q "Wind Forecast Desk"
+          curl -fs "http://localhost:8080/api/day?delivery_date=2026-01-15" | grep -q forecast_published_at
+      - if: always()
+        run: docker compose logs
