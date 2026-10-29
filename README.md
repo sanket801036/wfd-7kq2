@@ -2,7 +2,7 @@
 
 A web app for a UK utility's day-ahead trading desk. For any delivery day it shows **the national wind forecast that was actually available when the purchase had to be decided**, and it measures **how accurate those forecasts were** across January 2026, so the desk can size the extra power it buys.
 
-**Live app:** _add the Vercel URL here after deploying_
+**Live app:** https://wfd-7kq2.vercel.app  ·  **API docs:** https://wfd-7kq2.vercel.app/api/docs
 
 Data: Elexon BMRS — actual wind generation ([FUELHH](https://bmrs.elexon.co.uk/api-documentation/endpoint/datasets/FUELHH/stream), `fuelType = WIND`) and wind forecasts ([WINDFOR](https://bmrs.elexon.co.uk/api-documentation/endpoint/datasets/WINDFOR/stream)). Nothing else.
 
@@ -72,7 +72,7 @@ Scope: decisions made **1–31 January 2026**, i.e. delivery days **2 Jan – 1 
 | `GET /api/accuracy?decision_time=09:00&bias_correct=false` | January metrics, by day / hour / lead time, error histogram |
 | `GET /api/horizon` | MAE, RMSE and bias against minimum lead time (0–48 h) |
 
-Interactive docs at `/docs` when the API runs locally.
+Interactive docs (Swagger) at `/api/docs`, locally and on the live app.
 
 ## Running it
 
@@ -81,7 +81,7 @@ Interactive docs at `/docs` when the API runs locally.
 ```bash
 docker compose up --build
 # UI  http://localhost:8080
-# API http://localhost:8000/docs
+# API http://localhost:8000/api/docs
 ```
 
 **Without Docker:**

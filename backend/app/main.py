@@ -13,6 +13,10 @@ app = FastAPI(
     title="Wind Forecast Desk API",
     description="Day-ahead wind forecast selection and accuracy for GB, January 2026 decisions.",
     version="1.0.0",
+    # Under /api so the docs are reachable through the same rewrite as the API on Vercel.
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json",
+    redoc_url=None,
 )
 # The UI is served from the same origin in production; this is for local dev.
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET"], allow_headers=["*"])
