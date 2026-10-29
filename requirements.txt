@@ -1,0 +1,4 @@
+# Used by Vercel for api/index.py. Keep in step with backend/requirements.txt.
+fastapi==0.115.*
+pandas==2.2.*
+numpy==2.*
